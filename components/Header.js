@@ -1,6 +1,14 @@
 import { Fragment, useContext } from "react";
 import { Popover, Transition, Menu } from "@headlessui/react";
 import { StakingAndRewardContext } from "../context/StakingAndRewardContext";
+import {
+  FaWallet,
+  FaBars,
+  FaCalculator,
+  FaHandHoldingUsd,
+  FaTimesCircle,
+} from "react-icons/fa";
+
 import Modal from "./Modal";
 import Alert from "./Alert";
 
@@ -86,24 +94,23 @@ const Header = () => {
                     <div className="flex items-center justify-between w-full md:w-auto">
                       <a href="#">
                         <span className="sr-only">Blockgames</span>
-                        <h1 className="h-8 w-auto sm:h-10 text-indigo-600 text-2xl font-extrabold fo">
+                        <h1 className="h-8 w-auto sm:h-10 text-indigo-600 text-3xl font-extrabold">
                           Blockgames
                         </h1>
                       </a>
                       <div className="-mr-2 flex items-center md:hidden">
                         <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                           <span className="sr-only">Open main menu</span>
-                          <i
-                            className="fas fa-bars block h-6 w-6"
-                            aria-hidden="true"
-                          ></i>
+
+                          <FaBars className="block h-6 w-6" />
                         </Popover.Button>
                       </div>
                     </div>
                   </div>
-                  <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+                  <div className="hidden self-center md:block md:ml-10 md:pr-4 md:space-x-8">
                     {currentAccount && (
-                      <button className="font-medium text-gray-500 hover:text-gray-900">
+                      <button className="font-medium text-gray-500 hover:text-gray-900 flex">
+                        <FaWallet className="fa-solid fa-wallet h-6 w-6 mr-2" />
                         {`${currentAccount.slice(
                           0,
                           4
@@ -145,15 +152,15 @@ const Header = () => {
                       <div className="-mr-2">
                         <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                           <span className="sr-only">Close main menu</span>
-                          <i
-                            className="fas fa-times-circle block h-6 w-6"
-                            aria-hidden="true"
-                          ></i>
+
+                          <FaTimesCircle className="block h-6 w-6" />
                         </Popover.Button>
                       </div>
                     </div>
                     {currentAccount && (
                       <div className="px-2  pb-3 space-y-1">
+                        <FaWallet className="fa-solid fa-wallet h-6 w-6 mr-2" />
+
                         <button className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                           {`${currentAccount.slice(
                             0,
@@ -178,15 +185,15 @@ const Header = () => {
               <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                 <div className="sm:text-center lg:text-left">
                   <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                    <span className="block xl:inline">Data to enrich your</span>{" "}
+                    <span className="block xl:inline">STK Blockgames</span>{" "}
                     <span className="block text-indigo-600 xl:inline">
-                      online business
+                      What is Blockgames?
                     </span>
                   </h1>
                   <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                    qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-                    occaecat fugiat aliqua.
+                    A highly competitive game competition focusing on blockchain
+                    technology and how to leverage it for solving real life
+                    problems.
                   </p>
                   <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                     <div className="rounded-md shadow">
@@ -212,7 +219,7 @@ const Header = () => {
           <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
             <img
               className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-              src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+              src="https://images.unsplash.com/photo-1624996379671-b4d0837e45cb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8dG9rZW58ZW58MHx8MHx8&auto=format&fit=crop&w=2850&q=80"
               alt=""
             />
           </div>
@@ -232,7 +239,7 @@ const Header = () => {
                       Staked Token
                     </h4>
                     <h3 className="text-3xl text-gray-700 font-semibold leading-tight my-3">
-                      {staked / 1000000000000000000} STK
+                      {Number(staked) / 1000000000000000000} STK
                     </h3>
                     <p className="text-xs text-red-500  leading-tight">
                       Not Spendable
@@ -252,7 +259,7 @@ const Header = () => {
                       Token Balance
                     </h4>
                     <h3 className="text-3xl text-gray-700 font-semibold leading-tight my-3">
-                      {balance / 1000000000000000000} STK
+                      {Number(balance) / 1000000000000000000} STK
                     </h3>
                     <p className="text-xs text-green-500 leading-tight">
                       Spendable
@@ -292,10 +299,7 @@ const Header = () => {
                 onClick={() => showAllBalance()}
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                <i
-                  className="fas fa-bars -ml-1 mr-2 h-3 w-3  "
-                  aria-hidden="true"
-                ></i>
+                <FaCalculator className="-ml-1 mr-2 h-3 w-3  " />
                 Show Balance
               </button>
             </span>
@@ -305,10 +309,7 @@ const Header = () => {
                 onClick={() => claimReward()}
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                <i
-                  className="fas fa-bars -ml-1 mr-2 h-3 w-3  "
-                  aria-hidden="true"
-                ></i>
+                <FaHandHoldingUsd className="-ml-1 mr-2 h-3 w-3  " />
                 Claim Reward
               </button>
             </span>

@@ -75,8 +75,8 @@ export const StakingAndRewardProvider = ({ children }) => {
     const tokenAddress = contractAddress;
     const tokenSymbol = "STK";
     const tokenDecimals = 18;
-    const tokenImage = "http://placekitten.com/200/300";
-
+    const tokenImage =
+      "https://images.pexels.com/photos/1431158/pexels-photo-1431158.jpeg?auto=compress&cs=tinysrgb&w=200&h=300&dpr=1";
     try {
       const wasAdded = await ethereum.request({
         method: "wallet_watchAsset",
@@ -116,17 +116,38 @@ export const StakingAndRewardProvider = ({ children }) => {
     }
   };
 
+  const disonnected = () => {
+    if (window.ethereum.isConnected()) {
+      return;
+    } else {
+      window.location.reload();
+    }
+  };
+
   const connectWallet = async () => {
     if (!window.ethereum) return;
     try {
       const addressArray = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
-
       if (addressArray.length > 0) {
         setCurrentAccount(addressArray[0]);
+        console.log(addressArray[0]);
+        let storedAccount =
+          JSON.parse(window.localStorage.getItem("accounts")) || [];
+        console.log(storedAccount);
+        let accounts = storedAccount;
+        if (accounts.includes(addressArray[0])) {
+          return;
+        } else {
+          console.log(addressArray[0]);
+          accounts.push(addressArray[0]);
+          console.log(accounts);
+          window.localStorage.setItem("accounts", JSON.stringify(accounts));
+          addTokenToMetamask();
+        }
 
-        console.log(currentAccount);
+        //...
       }
     } catch (error) {
       console.error(error);
