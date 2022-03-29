@@ -349,7 +349,7 @@ const Body = () => {
                 Unstake STK
               </button>
             </span>
-            <span className="sm:ml-3 mr-1">
+            {/* <span className="sm:ml-3 mr-1">
               <button
                 type="button"
                 onClick={() => setBuyPrompt(true)}
@@ -358,7 +358,7 @@ const Body = () => {
                 <FaHandHoldingUsd className="-ml-1 mr-2 h-3 w-3" />
                 Buy Token(s)
               </button>
-            </span>
+          </span> */}
           </div>
           <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">

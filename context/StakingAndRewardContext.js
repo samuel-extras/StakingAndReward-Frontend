@@ -361,7 +361,7 @@ export const StakingAndRewardProvider = ({ children }) => {
       // throw new Error(error.message);
     }
   };
-  const buyToken = async () => {
+  {/*const buyToken = async () => {
     if (!window.ethereum) return;
 
     try {
@@ -393,7 +393,7 @@ export const StakingAndRewardProvider = ({ children }) => {
 
       // throw new Error(error.message);
     }
-  };
+  };*/}
 
   return (
     <StakingAndRewardContext.Provider
