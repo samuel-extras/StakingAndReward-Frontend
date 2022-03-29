@@ -8,17 +8,21 @@ export const StakingAndRewardContext = React.createContext();
 let metamask;
 let isConnected;
 
-if (typeof window !== "undefined") {
-  metamask = window.ethereum;
-  window.ethereum.on("accountsChanged", (accounts) => {
-    if (accounts.length > 0) {
-      window.location.reload();
-      console.log(`Account connected: ${accounts[0]}`);
-    } else {
-      window.location.reload();
-      console.log("Metamask disconnected from Dapp");
-    }
-  });
+try {
+  if (typeof window !== "undefined") {
+    metamask = window.ethereum;
+    window.ethereum.on("accountsChanged", (accounts) => {
+      if (accounts.length > 0) {
+        window.location.reload();
+        console.log(`Account connected: ${accounts[0]}`);
+      } else {
+        window.location.reload();
+        console.log("Metamask disconnected from Dapp");
+      }
+    });
+  }
+} catch (error) {
+  console.log(error);
 }
 
 export const StakingAndRewardProvider = ({ children }) => {
@@ -76,18 +80,23 @@ export const StakingAndRewardProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const ethereum = window.ethereum;
-    createTokenContract();
-    if (!currentAccount) return;
-    if (currentAccount) {
-      getTotalBalance();
-      getStakedCoin();
-      getBalance();
+    if (typeof window !== "undefined") {
+      if (!window.ethereum) return;
+      const ethereum = window.ethereum;
+      createTokenContract();
+      if (!currentAccount) return;
+      if (currentAccount) {
+        getTotalBalance();
+        getStakedCoin();
+        getBalance();
+      }
     }
   }, [currentAccount, reload, isConnected]);
 
   useEffect(() => {
-    checkIfWalletIsConnected();
+    if (typeof window !== "undefined") {
+      checkIfWalletIsConnected();
+    }
   }, []);
 
   const createTokenContract = async () => {
@@ -361,7 +370,7 @@ export const StakingAndRewardProvider = ({ children }) => {
       // throw new Error(error.message);
     }
   };
-  {/*const buyToken = async () => {
+  const buyToken = async () => {
     if (!window.ethereum) return;
 
     try {
@@ -393,7 +402,7 @@ export const StakingAndRewardProvider = ({ children }) => {
 
       // throw new Error(error.message);
     }
-  };*/}
+  };
 
   return (
     <StakingAndRewardContext.Provider
