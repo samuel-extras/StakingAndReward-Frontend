@@ -1,16 +1,12 @@
 import { Fragment, useRef, useState } from "react";
 import {
-  FaWallet,
-  FaBars,
-  FaCalculator,
   FaHandHoldingUsd,
-  FaTimesCircle,
   FaLock,
-  FaLockOpen,
   FaUnlockAlt,
   FaGift,
   FaRegPaperPlane,
   FaFileInvoice,
+  FaCheckCircle,
 } from "react-icons/fa";
 
 import { Dialog, Transition } from "@headlessui/react";

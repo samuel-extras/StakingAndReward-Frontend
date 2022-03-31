@@ -169,6 +169,7 @@ export const StakingAndRewardProvider = ({ children }) => {
   const connectWallet = async () => {
     if (typeof window.ethereum !== "undefined") {
       console.log("MetaMask is installed!");
+      setReload(!reload);
     } else {
       setAlertMessage("Please Install Metamask");
       setAlert(true);

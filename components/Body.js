@@ -1,4 +1,6 @@
 import { Fragment, useContext } from "react";
+import Image from "next/image";
+
 import { Popover, Transition, Menu } from "@headlessui/react";
 import { StakingAndRewardContext } from "../context/StakingAndRewardContext";
 import {
@@ -20,6 +22,12 @@ import Loader from "./Loader";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+
+const myLoader = ({ src, width, quality }) => {
+  return `https://images.unsplash.com/${src}?w=${width || 2850}&q=${
+    quality || 80
+  }`;
+};
 
 const Body = () => {
   const {
@@ -247,10 +255,12 @@ const Body = () => {
         </div>
         {!currentAccount && (
           <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-            <img
+            <Image
+              loader={myLoader}
               className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-              src="https://images.unsplash.com/photo-1624996379671-b4d0837e45cb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8dG9rZW58ZW58MHx8MHx8&auto=format&fit=crop&w=2850&q=80"
-              alt=""
+              alt="Mountains"
+              src="photo-1624996379671-b4d0837e45cb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8dG9rZW58ZW58MHx8MHx8&auto=format&fit=crop&"
+              layout="fill"
             />
           </div>
         )}
@@ -591,8 +601,8 @@ const Body = () => {
             name="buy"
             type="text"
             placeholder="Enter receipient Wallet Address"
-            message1="The value of STK is 10STK per ETH... "
-            message2="Note: Value STK value is not fixed, demand and supply are the major factors that may change the token value"
+            message1="10STK cost 1ETH... "
+            message2="Note: The value of STK is not fixed, demand and supply are the major factors that may change the token value"
             button="Buy Token"
             onChange={(e) => handleAddressChange(e)}
             onChangeAmount={(e) => handleAmountChange(e)}
